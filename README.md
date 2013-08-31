@@ -88,7 +88,9 @@ Create a Controller it is called LinkController in this example:
     
 #CSS stuff 
 
-ExtLinkChoiceExample / web-app / css / main.css
+ExtLinkChoiceExample / web-app / css / main.css, these are additional stuff you need to add to your site, I have presented it open i.e. for you to define it, in order to give you the maximum flexibility of how you want things to look.
+
+The first userspot stuff does the drop down menu next to a link, the link choose is for the link choice menu presented at the top and finally a larger block all related to displaying the pop up modal window
 
 
     #user_spot {
