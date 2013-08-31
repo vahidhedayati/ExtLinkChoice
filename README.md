@@ -13,7 +13,7 @@ Please refer to https://github.com/vahidhedayati/ExtLinkChoiceExample/ which has
 
 
 
-/ grails-app / conf / ApplicationResources.groovy
+#/ grails-app / conf / ApplicationResources.groovy
 
 	    modal { resource url: 'js/bootstrap.min.js' }
 
@@ -23,15 +23,15 @@ The above bootstrap.min.js exists in this plugin so there is no need to get this
 
 
 
-/ grails-app / views / layouts / main.gsp 
+#/ grails-app / views / layouts / main.gsp 
 
 	    <g:javascript library="modal"/>
       <g:javascript library="jquery"/>
   
 
 
+#/ grails-app / controllers / gtest / LinkController.groovy
 Create a Controller it is called LinkController in this example:
-/ grails-app / controllers / gtest / LinkController.groovy
 
     package gtest
     class LinkController {
@@ -41,7 +41,7 @@ Create a Controller it is called LinkController in this example:
 
 
 
-/ grails-app / views / link / index.gsp
+#/ grails-app / views / link / index.gsp
     
     <!DOCTYPE html> <html> <head>
     <meta name="layout" content="main"> <g:set var="entityName"
