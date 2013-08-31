@@ -4,7 +4,7 @@ ExtLinkChoice
 Grails plugin which gives your app easy ways of either giving the end user or setting the end user External Link choice to either use Modal to show the link in a popup window, same window, new tab. There is a small menu that can be added to your main.gsp or where required to let user change their choice. The choice is stored in session and so long as further link calls use the same method all links will then open according to set value. There is a little configuration required on your own app and I will provide a sample app as well as try walk through it as best as I can
 
 
-Although the modalbox plugin exits on grails.org, the plugin is bound to internal objects within a grails application, attempts to call external sites are blocked, I think its some security definition within ajax to stop cross site injection/hacking.
+Although the modalbox plugin exists on grails.org, the plugin is bound to internal objects within a grails application, attempts to call external sites are blocked, I think its some security definition within ajax to stop cross site injection {for hacking reasons it has been disabled}.
 
 
 
