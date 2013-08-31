@@ -11,8 +11,7 @@ class ExtLinkChoiceTagLib {
 		def description = attrs.remove('description')?.toString()
 		def modalLabel  = attrs.remove('modalLabel')?.toString()
 		def resolveit=attrs.remove('resolveit')?.toString()
-		
-		if (!modalLabel) modalLabel='Example Link'
+		if (!modalLabel) modalLabel='myModalLabel'
 		int resolv=0
 		if ((resolveit!=null) && (resolveit.matches("[0-9]+"))) { resolv=Integer.parseInt(resolveit) } 
 		if(link  && description) {
