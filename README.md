@@ -49,41 +49,39 @@ Create a Controller it is called LinkController in this example:
     <title><g:message code="default.create.label" args="[entityName]" /></title> </head>
     <body>
 
-    <!-- this returns the user choice values -->
-    <extlink:userPref update="linkPanel"/>
-    <!-- This bit gives the show/hide choices for above return -->
-    <extlink:userPref update="linkPanel" updateShow="linkChooser"/>
-    <a href="#" id="linkChooser">Link Choice Chooser</a>
-    <div id=linkPanel name=linkPanel >
-    <a href="#" id="linkChooser">hide</a>
-    </div>
-    <br/>
-    <!-- in this example we are calling a link called happy, gives a description defines the modalLabel which is found further down and resoveIt trys to resolve happy -->
-    <extlink:returnLink link="http://happy" description="happy site" modalLabel="myModalLabel" resolveit="1"/>
-    <!-- in this example we are calling a link called happy/com, gives a description defines the modalLabel which is found further down -->
-    <extlink:returnLink link="http://happy.com" description="happy site" modalLabel="myModalLabel"/>
-    <!-- ALL OF THE BELOW NOW RELATED TO MODAL -->
     
-    <div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <div id="myModalLabel"><h3></h3></div>
-    </div>
-    <div class="modal-body">
-    </div>
-    </div>
-    <r:script>
-      $('a.btn').on('click', function(e) {
-      e.preventDefault();
-      var url = $(this).attr('href');
-      $(".modal-body").html('<iframe width="100%" height="100%" frameborder="0" scrolling="no" allowtransparency="true" src="'+url+'"></iframe>');
-    });
+   
+   	<!-- this returns the user choice values -->
+	<extlink:userPref update="linkPanel"/>
+	
+ 	<!-- This bit gives the show/hide choices for above return -->
+	<extlink:userPref update="linkPanel" updateShow="linkChooser"/>
 
-    </r:script>
+	<a href="#" id="linkChooser">Link Choice Chooser</a>
+	<div id=linkPanel name=linkPanel >
+	</div>
+	<br/>
+
+	<extlink:returnLink link="http://www.grails.org" description="Grails Site" modalLabel="myModalLabel" />
 
 
-    </body>
-    </html>
+
+    	<!-- in this example we are calling a link called grails, gives a description defines the modalLabel which is found further down and resoveIt trys to resolve happy -->
+    	<extlink:returnLink link="http://grails" description="happy site" modalLabel="myModalLabel" resolveit="1"/>
+    	
+    	<!-- in this example we are calling a link called grails.org, gives a description defines the modalLabel which is found further down -->
+    	<extlink:returnLink link="http://grails.org" description="happy site" modalLabel="myModalLabel"/>
+    	<!-- ALL OF THE BELOW NOW RELATED TO MODAL -->
+   
+
+	<!-- Important this is required to return all the modal footer tags scripts -->
+	<extlink:modalFooter/>
+
+	
+    	</body>
+    	</html>
+    
+    
     
     
 #CSS stuff 
