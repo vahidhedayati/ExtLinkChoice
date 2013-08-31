@@ -62,15 +62,15 @@ Create a Controller it is called LinkController in this example:
 	</div>
 	<br/>
 
-	<extlink:returnLink link="http://www.grails.org" description="Grails Site" modalLabel="myModalLabel" />
+	<extlink:returnLink link="http://www.grails.org" description="Grails Site"  />
 
-
+	<extlink:returnLink link="http://www.grails.info" description="Grails INFO Site" />
 
     	<!-- in this example we are calling a link called grails, gives a description defines the modalLabel which is found further down and resoveIt trys to resolve happy -->
-    	<extlink:returnLink link="http://grails" description="happy site" modalLabel="myModalLabel" resolveit="1"/>
+    	<extlink:returnLink link="http://grails" description="happy site" resolveit="1"/>
     	
     	<!-- in this example we are calling a link called grails.org, gives a description defines the modalLabel which is found further down -->
-    	<extlink:returnLink link="http://grails.org" description="happy site" modalLabel="myModalLabel"/>
+    	<extlink:returnLink link="http://grails.org" description="happy site"/>
     	<!-- ALL OF THE BELOW NOW RELATED TO MODAL -->
    
 
