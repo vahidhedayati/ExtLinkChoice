@@ -36,7 +36,8 @@ class ExtLinkChoiceService {
 			output+=description+"</a></div>"
 		}else {
 			output ="<ul id='user_spot'>"
-			output +="<li><a data-toggle='modal' class='btn' href='"+newLink1+"' data-target='#myModal'>"+description+"</a>"
+			output +="<li><a data-toggle='modal' class='btn' href='"+newLink1+"' data-target='#myModal'>"
+			output +=description+"</a>"
 			output +="<ul id='user_spot_links'>"
 			output +="<li><a href='"+newLink1+"'>Same Window</a></li>"
 			output +="<li><a href='"+newLink1+"' target='_newwindow'>New Tab</a></li>"
