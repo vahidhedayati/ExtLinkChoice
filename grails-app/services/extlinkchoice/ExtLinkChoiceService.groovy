@@ -26,7 +26,7 @@ class ExtLinkChoiceService {
 		}
 		if ( (csetting.equals('')) && ( csetting==null)) { csetting="_same" }
 		if (csetting.equals("_new")) {
-			output="<a href='"+newLink1+"' target='_newwindow'>"+description+"</a>"
+			output=""<div class=linkchoicebutton><a href='"+newLink1+"' target='_newwindow'>"+description+"</a></div>"
 		} else if (csetting.equals("_same")) {
 			output="<a href='"+newLink1+"'>"+description+"</a>"
 		} else if (csetting.equals("_modal")) {
