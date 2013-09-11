@@ -1,29 +1,19 @@
 package extlinkchoice
 
-	
-import javax.servlet.http.HttpSession
-import org.springframework.web.context.request.RequestContextHolder
-	
+
 class ExtLinkChoiceService {
 	String output
 	/*
 	 * returnLink takes the link,description and integer of 1 to
 	 * resolve or 0 to not resolve the given url
 	 */
-	String returnLink(String link, String description,int resolveit,String modalLabel) {
-		String csetting=getSession().linkchoice
-		output=finalResult(link,description,csetting,resolveit,modalLabel)
+	String returnLink(String link, String description,int resolveit,String modalLabel,String choice) {
+		//String csetting=getSession().linkchoice
+		//csetting replaced by choice now returned by gsp call
+		output=finalResult(link,description,choice,resolveit,modalLabel)
 		return output
 	}
 		
-	/*
-	 * This is very similar to above but works with a controller and
-	 * requires an extra input of: csetting = current setting
-	 */
-	String returnControlLink(String link, String description,String csetting,int resolveit,String modalLabel) {
-		output=finalResult(link,description,csetting,resolveit,modalLabel)
-		return output
-	}
 		
 	/*
 	 * Wrapper for above services
@@ -59,9 +49,12 @@ class ExtLinkChoiceService {
 		
 	
 	/*
+	 * 
 	 * Return Session information to this service
-	 */
-	private HttpSession getSession() {
-		return RequestContextHolder.currentRequestAttributes().getSession()
-	}
+	
+		private HttpSession getSession() {
+			return RequestContextHolder.currentRequestAttributes().getSession()
+		}
+	*/
+	 
 }
