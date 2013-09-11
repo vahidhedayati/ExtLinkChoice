@@ -26,11 +26,14 @@ class ExtLinkChoiceService {
 		}
 		if ( (csetting.equals('')) && ( csetting==null)) { csetting="_same" }
 		if (csetting.equals("_new")) {
-			output=""<div class=linkchoicebutton><a href='"+newLink1+"' target='_newwindow'>"+description+"</a></div>"
+			output="<div class=linkchoicebutton>"
+			output+="<a href='"+newLink1+"' target='_newwindow'>"+description+"</a></div>"
 		} else if (csetting.equals("_same")) {
-			output="<a href='"+newLink1+"'>"+description+"</a>"
+			output="<div class=linkchoicebutton><a href='"+newLink1+"'>"+description+"</a></div>"
 		} else if (csetting.equals("_modal")) {
-			output="<a data-toggle='modal' class='btn' href='"+newLink1+"' data-target='#myModal'>"+description+"</a>"
+			output="<div class=linkchoicebutton>"
+			output+="<a data-toggle='modal' class='btn' href='"+newLink1+"' data-target='#myModal'>"
+			output+=description+"</a></div>"
 		}else {
 			output ="<ul id='user_spot'>"
 			output +="<li><a data-toggle='modal' class='btn' href='"+newLink1+"' data-target='#myModal'>"+description+"</a>"
