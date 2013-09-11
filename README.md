@@ -50,35 +50,29 @@ Create a Controller it is called LinkController in this example:
     <body>
 
     
-       <!--  method 1 - do not use with method2 in example2.gsp right at the bottom -->
+        <!--  method 1 - do not use with method2 in example2.gsp right at the bottom -->
     	<!-- both method1 and method2 called together breaks the functionality of this plugin -->
    	<!-- this returns the user choice values -->
-	<extlink:userPref update="linkPanel"/>
-	
  	<!-- This bit gives the show/hide choices for above return -->
 	<extlink:userPref update="linkPanel" updateShow="linkChooser"/>
-
 	<a href="#" id="linkChooser">Link Choice Chooser</a>
 	<div id=linkPanel name=linkPanel >
 	</div>
 	<br/>
-	
 	<!-- end method 1 call --> 
+	
 	<!-- below are all the links which works with either method1 or method2 call -->
-
 	<extlink:returnLink link="http://www.grails.org" description="Grails Site"  />
-
 	<extlink:returnLink link="http://www.grails.info" description="Grails INFO Site" />
-
     	<!-- in this example we are calling a link called grails, gives a description defines the modalLabel which is found further down and resoveIt trys to resolve happy -->
     	<extlink:returnLink link="http://grails" description="happy site" resolveit="1"/>
-    	
     	<!-- in this example we are calling a link called grails.org, gives a description defines the modalLabel which is found further down -->
     	<extlink:returnLink link="http://grails.org" description="happy site"/>
     	<!-- ALL OF THE BELOW NOW RELATED TO MODAL -->
    
 
 	<!-- Important this is required to return all the modal footer tags scripts -->
+	<!-- required by either method1 or method2 calls -->
 	<extlink:modalFooter/>
 
 	
