@@ -11,11 +11,15 @@ class ExtLinkChoiceTagLib {
 		def description = attrs.remove('description')?.toString()
 		def modalLabel  = attrs.remove('modalLabel')?.toString()
 		def resolveit=attrs.remove('resolveit')?.toString()
+		def choice=attrs.remove('choice')?.toString()
 		if (!modalLabel) modalLabel='myModalLabel'
 		int resolv=0
+		if (!modalLabel) modalLabel=description
+		if (!choice) choice='_same'
 		if ((resolveit!=null) && (resolveit.matches("[0-9]+"))) { resolv=Integer.parseInt(resolveit) } 
+		if (!resolveit) resolveit=resolv
 		if(link  && description) {
-			def result = extLinkChoiceService.returnLink(link,description,resolv,modalLabel)
+			def result = extLinkChoiceService.returnLink(link,description,resolv,modalLabel,choice)
 			out << "${result}"
 		}
 	}
@@ -35,6 +39,42 @@ class ExtLinkChoiceTagLib {
 		out << "var url = \$(this).attr('href');\n"
 		out << "\$(\".modal-body\").html('<iframe width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowtransparency=\"true\" src=\"'+url+'\"></iframe>');\n"
 		out << "});\n"
+		out << "</script>\n"	
+	}
+
+	def selectPref = {attrs ->
+		if (!attrs.id) {
+			throwTagError("Tag [autoComplete] is missing required attribute [id]")
+		}
+		def clazz = ""
+		def name = ""
+		if (!attrs.controller) attrs.controller= "extlinkchoice"
+		if (!attrs.action) attrs.action= "linkchooser"
+		if (!attrs.value) attrs.value =""
+		if (attrs.class) clazz = " class='${attrs.class}'"
+		if (attrs.name) {
+		name = "${attrs.name}"
+		}
+		else {
+		name = "${attrs.id}"
+		}
+		if (!attrs.noSelection) {
+			throwTagError("Tag [noSelection] is missing required attribute")
+		}
+		if (!attrs.appendValue) attrs.appendValue='null'
+		if (!attrs.appendName) attrs.appendName='Values Updated'
+		def primarylist=['Modal Popup','Same Window','New Window','Multiple Choice' ]
+		def gsattrs=[ 'id': "${attrs.id}", value: "${attrs.value}", name: name ]
+		gsattrs['from'] = primarylist
+		gsattrs['noSelection'] =attrs.noSelection
+		gsattrs['onchange'] = "${remoteFunction(controller:''+attrs.controller+'', action:''+attrs.action+'', params:'\'id=\' + escape(this.value)',onSuccess:''+attrs.id+'Update(data)')}"
+		out<< g.select(gsattrs)
+		out << "\n<script type='text/javascript'>\n"
+		out << "function ${attrs.id}Update(data) { \n"
+		out << "var newDoc = document.open('text/html', 'replace');\n"
+		out << "newDoc.write(data);\n"
+		out << "newDoc.close();\n"
+		out << "}\n"
 		out << "</script>\n"	
 	}
 	
