@@ -212,4 +212,22 @@ The first userspot stuff does the drop down menu next to a link, the link choose
 / web-app / images / bootstrap /  in the sample site
 
 
+
+0.3 includes select method:
+
+    <!--  method 2 - do not need to call any of above to use select method -->
+    <extlink:selectPref id='autolinkUpdater' noSelection="['null': 'Choose Link Method']" />
+    <!--  end method 2 -->
+    <br/><br/>
+    <!--  final bit required by both - the bit that displays the links depending on user choice   -->
+    <!--  if required you can remove all of above and hard code the choice by setting the choice=value below -->
+    <!--  take a look at the source controller of plugin project or observe html produced by method 1 -->
+    <extlink:returnLink link="http://www.grails.org" description="Grails Site" choice="${session.linkchoice }" />
+    <extlink:returnLink link="http://www.grails.info" description="Grails INFO Site" choice="${session.linkchoice }"/>
+    <extlink:returnLink link="http://www.github.com" description="GITHUB" choice="${session.linkchoice }"/>
+    <extlink:modalFooter/>
+    
+    
+    
+
 That should be it, anything missed can be found on the sample site https://github.com/vahidhedayati/ExtLinkChoiceExample/
