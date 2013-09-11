@@ -60,14 +60,15 @@ Create a Controller it is called LinkController in this example:
 	</div>
 	<br/>
 	<!-- end method 1 call --> 
-	
+	<!--  if required you can remove all of above and hard code the choice by setting the choice=value below -->
+	<!--  take a look at the source controller of plugin project or observe html produced by method 1 -->
 	<!-- below are all the links which works with either method1 or method2 call -->
-	<extlink:returnLink link="http://www.grails.org" description="Grails Site"  />
-	<extlink:returnLink link="http://www.grails.info" description="Grails INFO Site" />
+	<extlink:returnLink link="http://www.grails.org" description="Grails Site" choice="${session.linkchoice }" />
+	<extlink:returnLink link="http://www.grails.info" description="Grails INFO Site" choice="${session.linkchoice }" />
     	<!-- in this example we are calling a link called grails, gives a description defines the modalLabel which is found further down and resoveIt trys to resolve happy -->
-    	<extlink:returnLink link="http://grails" description="happy site" resolveit="1"/>
+    	<extlink:returnLink link="http://grails" description="happy site" resolveit="1" choice="${session.linkchoice }" />
     	<!-- in this example we are calling a link called grails.org, gives a description defines the modalLabel which is found further down -->
-    	<extlink:returnLink link="http://grails.org" description="happy site"/>
+    	<extlink:returnLink link="http://grails.org" description="happy site" choice="${session.linkchoice }"/>
     	<!-- ALL OF THE BELOW NOW RELATED TO MODAL -->
    
 
