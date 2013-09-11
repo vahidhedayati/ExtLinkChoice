@@ -50,7 +50,8 @@ Create a Controller it is called LinkController in this example:
     <body>
 
     
-   
+       <!--  method 1 - do not use with method2 in example2.gsp right at the bottom -->
+    	<!-- both method1 and method2 called together breaks the functionality of this plugin -->
    	<!-- this returns the user choice values -->
 	<extlink:userPref update="linkPanel"/>
 	
@@ -61,6 +62,9 @@ Create a Controller it is called LinkController in this example:
 	<div id=linkPanel name=linkPanel >
 	</div>
 	<br/>
+	
+	<!-- end method 1 call --> 
+	<!-- below are all the links which works with either method1 or method2 call -->
 
 	<extlink:returnLink link="http://www.grails.org" description="Grails Site"  />
 
@@ -255,7 +259,8 @@ The first userspot stuff does the drop down menu next to a link, the link choose
 
 0.3 includes select method:
 
-    <!--  method 2 - do not need to call any of above to use select method -->
+    <!--  method 2 - do not use with method1 in index.gsp example -->
+    <!-- both method1 and method2 called breaks the functionality of this plugin -->
     <extlink:selectPref id='autolinkUpdater' noSelection="['null': 'Choose Link Method']" />
     <!--  end method 2 -->
     <br/><br/>
