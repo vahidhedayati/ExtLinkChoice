@@ -271,3 +271,11 @@ The first userspot stuff does the drop down menu next to a link, the link choose
     
 
 That should be it, anything missed can be found on the sample site https://github.com/vahidhedayati/ExtLinkChoiceExample/
+
+
+0.4 using with kickstart with boostrap:
+Simply add this to the bottom of your page rather than modalFooter
+
+	<extlink:modalbootstrapFooter/>
+
+No need to include the bootstrap.min.js or bootstrap.css since this is already part of kickstart with boostrap
