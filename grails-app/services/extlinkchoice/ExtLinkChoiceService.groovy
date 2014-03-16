@@ -2,24 +2,25 @@ package extlinkchoice
 
 
 class ExtLinkChoiceService {
-	String output
+	
+	
 	/*
 	 * returnLink takes the link,description and integer of 1 to
 	 * resolve or 0 to not resolve the given url
 	 */
-	String returnLink(String link, String description,int resolveit,String modalLabel,String choice) {
-		//String csetting=getSession().linkchoice
-		//csetting replaced by choice now returned by gsp call
-		output=finalResult(link,description,choice,resolveit,modalLabel)
-		return output
+	String returnLink(String link, String description,int resolveit,String modalLabel,String choice,String id,String title) {
+		return finalResult(link,description,choice,resolveit,modalLabel,id,title)
+		
 	}
 		
 		
 	/*
 	 * Wrapper for above services
 	 */
-	String finalResult(String link, String description,String csetting,int resolveit,String modalLabel) {
+	String finalResult(String link, String description,String csetting,int resolveit,String modalLabel,String id,String title) {
 		def newLink1=link
+		String output
+		
 		if (resolveit==1) {
 			DnsService ds=new DnsService()
 			newLink1=ds.resolveUrlHost(link)
@@ -32,11 +33,12 @@ class ExtLinkChoiceService {
 			output="<div class=linkchoicebutton><a href='"+newLink1+"'>"+description+"</a></div>"
 		} else if (csetting.equals("_modal")) {
 			output="<div class=linkchoicebutton>"
-			output+="<a data-toggle='modal' class='btn' href='"+newLink1+"' data-target='#myModal'>"
+			output+="<a data-toggle='modal' class='btn' href='"+newLink1+"' data-target='#${id}'>"
 			output+=description+"</a></div>"
+			
 		}else {
 			output ="<ul id='user_spot'>"
-			output +="<li><a data-toggle='modal' class='btn' href='"+newLink1+"' data-target='#myModal'>"
+			output +="<li><a data-toggle='modal' class='btn' href='"+newLink1+"' data-target='#${id}'>"
 			output +=description+"</a>"
 			output +="<ul id='user_spot_links'>"
 			output +="<li><a href='"+newLink1+"'>Same Window</a></li>"
