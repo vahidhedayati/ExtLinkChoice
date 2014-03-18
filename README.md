@@ -1,4 +1,4 @@
-ExtLinkChoice 0.7
+ExtLinkChoice 0.8
 =============
 
 Grails plugin which lets you provide a link choice to users, so a user gets a pop up choice when hovering links. It is designed to support a full url 
@@ -9,7 +9,7 @@ so you may wish to g.createLink (...,absolute:true) if you wish to use it intern
 ## Installation:
 Add plugin Dependency :
 
-	compile ":extlinkchoice:0.7" 
+	compile ":extlinkchoice:0.8" 
 
 Or via grails command line:
 
@@ -22,6 +22,7 @@ Please refer to [example site](https://github.com/vahidhedayati/ExtLinkChoiceExa
 
 
 # Version info
+	0.8 converted all fixed values to attributes passed as optional values via taglib
 	0.7 issues with low resolution and capped content fixed. 
 	0.6 minor modification to loadmodalbox template - tested and working against standard grails site and kickstart with boostrap
 	0.5 re-write of most of the plugin.
@@ -47,6 +48,7 @@ Create a Controller it is called LinkController
 
 
 
+## Either
 #### [grails-app / views / link / index.gsp](https://github.com/vahidhedayati/ExtLinkChoiceExample/blob/master/grails-app/views/link/index.gsp)
 
 	<extlink:userPref update="linkPanel" updateShow="linkChooser"/>
@@ -54,34 +56,80 @@ Create a Controller it is called LinkController
 	<div id="linkPanel" name="linkPanel" >
 	</div>
 	
-	<br/>
+
+
+## Or:
+#### [grails-app / views / link / example2.gsp](https://github.com/vahidhedayati/ExtLinkChoiceExample/blob/master/grails-app/views/link/example2.gsp)
+
+	<!-- method 2 - do not need to call any of above to use select method -->
+	<extlink:selectPref id='autolinkUpdater' noSelection="['null': 'Choose Link Method']" />
+
 	
-	<extlink:returnLink 
-		link="http://www.grails.org" 
-		description="Main Grails Site" 
-		choice="${session.linkchoice}" 
-		title="Grails.ORG" 
-		id="MyModal1"
-		modalLabel="MyModalLabel1"
-	/>
 	
-	<extlink:returnLink 
-		link="http://www.grails.info" 
-		description="Grails information Site" 
-		choice="${session.linkchoice }" 
-		title="Grails.INFO" 
-		id="MyModal2" 
-		modalLabel="MyModalLabel2"
-	/>
 	
+## Examples:
+	
+
+## pre < extlinkchoice:0.6
+
 	<extlink:returnLink 
-	link="http://www.happy.com" 
-	description="Happy.com" 
+	link="http://www.example.com" 
+	description="example.com" 
 	choice="${session.linkchoice }" 
-	title="Walmart happy.com" 
+	/>
+
+### Basic usage since 0.6
+ 	
+	<extlink:returnLink 
+	link="http://www.example.com" 
+	description="example.com" 
+	choice="${session.linkchoice }" 
+	title="example.com website" 
 	id="MyModal3"
 	modalLabel="MyModalLabel3"
 	/>
+
+### Enhanced features since 0.8
+
+Below you will see lots of new options that can be defined, if not defined the values shown in the example are 
+the actual default values, which can of course be set by you to anything that is valid as shown: 
+
+
+	<extlink:returnLink 
+	link="http://www.example.com" 
+	description="example.com" 
+	choice="${session.linkchoice }" 
+	title="example.com website" 
+	id="MyModal3"
+	modalLabel="MyModalLabel3"
+	
+	
+	calctype="*" 			[ModalBox: choices : */-+ ]
+	height="0.6"			[ModalBox: ScreenSize * 0.6 = modalbox height ]
+	width="0.6"			[ ModalBox: ScreenSize * 0.6 = modalbox width ]
+	bodyheight="0.4"	[ modal-body: container height default is 0.2 down from actual height ]
+	bodywidth='98%'		[ modal-body: container width default is 98%]
+	overflow="hidden"	[ ModalBox: css value for overflow(scrollbars) to display modalbox ]
+	position="fixed"	[ ModalBox: css value for position to display modalbox ]
+	top="0"		[ ModalBox: css value for top to display modalbox from ]
+	margintop='10em'	[ ModalBox: css value for margintop to display modalbox from ]
+	marginright='auto'	[ ModalBox: css value for marginright to display modalbox from ]
+	left='auto'			[ ModalBox: css value for left to display modalbox from ]
+	right='auto'		[ ModalBox: css value for right to display modalbox from ]
+	
+	
+	iframescrolling='auto' 	[ modal-body: iframe scrolling value ]
+	iframetransparency='true' [ modal-body: iframe transparency value ]
+	iframezoom='1'	[ modal-body: iframe zoom  value ]
+	iframewidth='100%'	[ modal-body: iframe width ]
+	iframeheight='100%'	[ modal-body: iframe height ] 
+	iframemargin='0'	[ modal-body: iframe margin ] 
+	iframepadding='0'	[ modal-body: iframe padding ] 
+	 
+	/>
+
+
+	
 
 
 The first component calls userPref which loads up a link choice link - upon clicking it drops down with options to update all the links on this index page.
@@ -98,12 +146,6 @@ the returnLink is now doing all the work,
 
 Id and modalLabel need to be unique upon multiple calls of this taglib on the same page
 
-
-
-#### [grails-app / views / link / example2.gsp](https://github.com/vahidhedayati/ExtLinkChoiceExample/blob/master/grails-app/views/link/example2.gsp)
-
-	<!-- method 2 - do not need to call any of above to use select method -->
-	<extlink:selectPref id='autolinkUpdater' noSelection="['null': 'Choose Link Method']" />
 
 
 Is the only difference between both pages, it simply loads up a select box for options and upon updates the page is redirected back with new config in session
