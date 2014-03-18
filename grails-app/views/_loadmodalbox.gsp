@@ -1,11 +1,11 @@
 <div class='modal fade' id="${attrs.id }" tabindex='-1' role='dialog' aria-labelledby="${attrs.modalLabel }" aria-hidden='true'>
-  <div class="modal-dialog" style="width:100%;height:100%; ">
+  <div class="modal-dialog${attrs.id }" style="width:100%;height:100%; ">
       <div class="modal-content">
 	<div class='modal-header'>
 		<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>
 		<div id='myModalLabel'><h2>${attrs?.title}</h2><h3>${attrs?.description}</h3></div>
 	</div>
-	<div class="modal-body" style="width:100%;height:100%; ">
+	<div class="modal-body" >
 
 	</div>
 	</div>
@@ -26,9 +26,10 @@
 		$(".modal").css('margin-right','auto');
 		$(".modal").css('height',$( window ).height()*0.6);
 		$(".modal").css('width',$( window ).width()*0.6);
-		$(".modal-body").css('height',$( window ).height()*0.5);
-		$(".modal-body").css('width',$( window ).width()*0.5);
-		$(".modal-body").html('<iframe width="100%" height="100%" frameborder="0" scrolling="no" allowtransparency="true" src="'+url+'"></iframe>');
+		$(".modal").css('overflow','hidden');
+		$(".modal-body").css('height',$( window ).height()*0.4);
+		$(".modal-body").css('width','100%');
+		$(".modal-body").html('<iframe style="zoom=2;width: 100%; height: 100%; margin:0; padding:0;" frameborder="0" scrolling="auto" allowtransparency="true" src="'+url+'"></iframe>');
 	});
 	
 </g:javascript>

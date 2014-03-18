@@ -1,4 +1,4 @@
-ExtLinkChoice 0.6
+ExtLinkChoice 0.7
 =============
 
 Grails plugin which lets you provide a link choice to users, so a user gets a pop up choice when hovering links. It is designed to support a full url 
@@ -9,7 +9,7 @@ so you may wish to g.createLink (...,absolute:true) if you wish to use it intern
 ## Installation:
 Add plugin Dependency :
 
-	compile ":extlinkchoice:0.6" 
+	compile ":extlinkchoice:0.7" 
 
 Or via grails command line:
 
@@ -22,7 +22,7 @@ Please refer to [example site](https://github.com/vahidhedayati/ExtLinkChoiceExa
 
 
 # Version info
-
+	0.7 issues with low resolution and capped content fixed. 
 	0.6 minor modification to loadmodalbox template - tested and working against standard grails site and kickstart with boostrap
 	0.5 re-write of most of the plugin.
 	 
