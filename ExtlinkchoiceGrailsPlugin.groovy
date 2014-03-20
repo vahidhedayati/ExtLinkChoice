@@ -1,5 +1,5 @@
 class ExtlinkchoiceGrailsPlugin {
-def version = "0.8"
+def version = "0.9"
 def grailsVersion = "2.0 > *"
  
 def title = "External Link Choice Provider Plugin"
