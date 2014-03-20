@@ -47,36 +47,135 @@ class ExtLinkChoiceTagLib {
 	 */
 	def returnLink =  { attrs, body ->
 		
+		// Pick a random num 0-50 to add to id if missing
+		def rnum = new Random().nextInt(50);
+		
+		/*
+		 * Throw error if no url given as :
+		 * 
+		 * Attribute: link
+		 * 
+		 */
+		if (!attrs.link) {
+			throwTagError("Tag [returnLink] is missing required attribute [link]")
+		}
+		
+		/*
+		 * Attribute: description
+		 * Set a description or title for link
+		 * 
+		 */
+		if (!attrs.description) {
+			attrs.description='My URL'
+		}
+		
+		/*
+		 * Attribute: title
+		 * 
+		 * Set the title for your modalbox
+		 * 
+		 */
 		if (!attrs.title) {
-			attrs.title='MY Modal Page'
+			attrs.title=attrs.description
 		}
+		
+		/*
+		 * Attribute: id
+		 * 
+		 * This is the id of your modalbox which also gets set as part of 
+		 * modalLabel if not defined already
+		 * 
+		 */
 		if (!attrs.id) {
-			attrs.id='myModal'
+			attrs.id='myModal'+rnum
 		}
+		
+		
+		/*
+		 * Attribute modalLabel
+		 * 
+		 */
 		if (!attrs.modalLabel) {
-			attrs.modalLabel='myModalLabel'
+			attrs.modalLabel='myModalLabel'+rnum
 		}
 			
+		/*
+		 * Attribute: choice
+		 * 
+		 * How to show the link choices being:
+		 * 
+		 * _same 
+		 * _newwindow
+		 * _modal
+		 * _multi or anything that does not match above 3.
+		 * 
+		 * 
+		 * Same takes over same window, new window in a tab or new window depending on browser,
+		 * modal in modal box and
+		 * multi is multiple choice the user picks where clicking link opens modal and 
+		 * hovering over gives choice to open over same or new window
+		 * 
+		 */
 		if (!attrs.choice) {
 			attrs.choice='_same'
 		}
 			
 		
+		/*
+		 * Attribute resolveit
+		 * 
+		 * resolveit values: 
+		 * 0 default 
+		 * 1 yes resolve given above link value
+		 * 
+		 * so if you gave link:
+		 * 
+		 * http://myhost/logs/log1.txt
+		 * 
+		 * It would then attempt to resolve myhost and actually present link as:
+		 * 
+		 * http://myhost.mydomain.com/logs/log1.txt
+		 * 
+		 * (depending on your DNS or if public dns )
+		 * 
+		 */
 		int resolv=0
 		def resolveit=attrs.resolveit
 		if ((resolveit!=null) && (resolveit.matches("[0-9]+")))  { resolv=Integer.parseInt(resolveit) } 
-		if (!resolveit) { resolveit=resolv }
 		
-		if(attrs.link  && attrs.description) {
-			modalBoxConfig(attrs)
-			modalIframeConfig(attrs)
-			out << g.render(contextPath: pluginContextPath,template: 'loadmodalbox', model: [attrs:attrs])
-			def result = extLinkChoiceService.returnLink(attrs.link.toString(),attrs.description.toString(),resolveit,attrs.modalLabel.toString(),attrs.choice.toString(),attrs.id.toString(),attrs.title.toString())
-			out << "${result}"
-		}
+		
+		//Further override checks set modalBox config up
+		modalBoxConfig(attrs)
+		
+		//Further override checks set modalBox IFRAME config up
+		modalIframeConfig(attrs)
+		
+		// Render modalbox for this link
+		// -- TODO need to maybe revert back to original method and think of a better way of using the samebox but showing buttons titles etc
+		out << g.render(contextPath: pluginContextPath,template: 'loadmodalbox', model: [attrs:attrs])
+		
+		// Now process the link as per user action 
+		def result = extLinkChoiceService.returnLink(attrs.link.toString(),attrs.description.toString(),resolv,attrs.modalLabel.toString(),attrs.choice.toString(),attrs.id.toString(),attrs.title.toString())
+		
+		//Show results on user screen
+		out << "${result}"
+		
 		
 	}
 	
+	/*
+	 * Taglib selectPref:
+	 * 
+	 * Usage:
+	 * <extlink:selectPref id='autolinkUpdater' noSelection="['null': 'Choose Link Method']" />
+	 * 
+	 * This now loads up a select box and on mouse out of the provided options the
+	 * action is set in session and page is reverted back to where it was
+	 * 
+	 * TODO this needs to tidy up - possibly relook at redirect and maybe update div if given
+	 * if not then reload page  
+	 * 
+	 */
 
 	def selectPref = {attrs ->
 		if (!attrs.id) {
@@ -120,14 +219,27 @@ class ExtLinkChoiceTagLib {
 		out << g.render(contextPath: pluginContextPath,template: 'reloadpage', model: [attrs:attrs])
 	}
 	
-
+/*
+ * 
+ * Taglib: userpref 
+ * 
+ * Example:
+ * <extlink:userPref update="linkPanel" updateShow="linkChooser"/>
+ * <a href="#" id="linkChooser">Link Choice Chooser</a>
+ * <div id="linkPanel" name="linkPanel"></div>
+ * 
+ * 
+ * This then loads a template into the div and shows link to let user have a drop down when selecting choice
+ * 
+ */
 	def userPref = { attrs, body ->
 		def update = attrs.remove('update')?.toString()
 		def updateShow = attrs.remove('updateShow')?.toString()
 		
 		if (params.linkchoice)  {
 			session.linkchoice=params.linkchoice
-		}	
+		}
+			
 		if (!session.linkchoice) {
 			session.linkchoice='_same'
 		}	
