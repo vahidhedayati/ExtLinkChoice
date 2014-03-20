@@ -61,21 +61,17 @@ class ExtLinkChoiceTagLib {
 			attrs.choice='_same'
 		}
 			
-		if ((attrs.resolveit) && (attrs.resolveit.matches("[0-9]+"))) { 
-			attrs.resolvit=Integer.parseInt(attrs.resolveit) 
-		}
-		 
-		if (!attrs.resolveit) {
-			attrs.resolveit=0
-		}
 		
-			
+		int resolv=0
+		def resolveit=attrs.resolveit
+		if ((resolveit!=null) && (resolveit.matches("[0-9]+")))  { resolv=Integer.parseInt(resolveit) } 
+		if (!resolveit) { resolveit=resolv }
 		
 		if(attrs.link  && attrs.description) {
 			modalBoxConfig(attrs)
 			modalIframeConfig(attrs)
 			out << g.render(contextPath: pluginContextPath,template: 'loadmodalbox', model: [attrs:attrs])
-			def result = extLinkChoiceService.returnLink(attrs.link.toString(),attrs.description.toString(),attrs.resolv ?: 0,attrs.modalLabel.toString(),attrs.choice.toString(),attrs.id.toString(),attrs.title.toString())
+			def result = extLinkChoiceService.returnLink(attrs.link.toString(),attrs.description.toString(),resolveit,attrs.modalLabel.toString(),attrs.choice.toString(),attrs.id.toString(),attrs.title.toString())
 			out << "${result}"
 		}
 		
