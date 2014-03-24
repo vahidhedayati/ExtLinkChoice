@@ -1,9 +1,9 @@
 class ExtlinkchoiceGrailsPlugin {
-def version = "0.10"
+def version = "0.11"
 def grailsVersion = "2.0 > *"
  
 def title = "External Link Choice Provider Plugin"
-def description = 'Works for now on external links, will give your users a facility to choose how they wish for these type of links can be opened. Once set any other reused method will open in the same manner. The multi choice provides a drop down option over these links'
+def description = 'Displays external link or internal controller/action as a modalbox popup, Users can choose how they wish for these links to be opened.'
 def documentation = "http://grails.org/plugin/extlinkchoice"
 def license = "GPL2"
 def developers = [name: "Vahid Hedayati", email: "badvad@gmail.com"]

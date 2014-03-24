@@ -22,8 +22,18 @@ class ExtLinkChoiceTagLib {
 	 *OR just call this on a specific gsp page if you have specific use
 	 */
 	 
-	def loadbootstrap= {
+	def loadbootstrap= {attrs, body ->
 		out << g.render(contextPath: pluginContextPath,template: 'loadbootstrap')
+		//Further override checks set modalBox config up
+		modalBoxConfig(attrs)
+		
+		//Further override checks set modalBox IFRAME config up
+		modalIframeConfig(attrs)
+		// Render modalbox for this link
+		// -- TODO need to maybe revert back to original method and think of a better way of using the samebox but showing buttons titles etc
+		out << g.render(contextPath: pluginContextPath,template: 'loadmodalbox', model: [attrs:attrs])
+		
+		
 	}
 	
 	
@@ -35,8 +45,19 @@ class ExtLinkChoiceTagLib {
 	 * <extlink:loadplugincss/>
 	 * </head>
 	 */
-	def loadplugincss= {
+	def loadplugincss= {attrs, body ->
 		out << g.render(contextPath: pluginContextPath,template: 'loadplugincss')
+		
+		//Further override checks set modalBox config up
+		modalBoxConfig(attrs)
+		
+		//Further override checks set modalBox IFRAME config up
+		modalIframeConfig(attrs)
+		// Render modalbox for this link
+		// -- TODO need to maybe revert back to original method and think of a better way of using the samebox but showing buttons titles etc
+		out << g.render(contextPath: pluginContextPath,template: 'loadmodalbox', model: [attrs:attrs])
+		
+		
 	}
 	
 	
@@ -50,15 +71,29 @@ class ExtLinkChoiceTagLib {
 		// Pick a random num 0-50 to add to id if missing
 		def rnum = new Random().nextInt(50);
 		
+		boolean extlink=true
+		
+		if ((attrs.controller)&&(attrs.action)) {
+			extlink=false
+		}
+		
 		/*
 		 * Throw error if no url given as :
 		 * 
 		 * Attribute: link
 		 * 
 		 */
-		if (!attrs.link) {
+		if ((!attrs.link)&&(extlink)) {
 			throwTagError("Tag [returnLink] is missing required attribute [link]")
 		}
+		
+		if (extlink==false){
+			def g = new org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib() 
+			attrs.link= g.createLink(controller: attrs.controller, action: attrs.action, params:attrs,  absolute: 'true' )
+			if (!attrs.link) { 
+				throwTagError("Tag [returnLink] could not generate [link] from controller/action")
+			}
+		} 
 		
 		/*
 		 * Attribute: description
@@ -142,18 +177,7 @@ class ExtLinkChoiceTagLib {
 		int resolv=0
 		def resolveit=attrs.resolveit
 		if ((resolveit!=null) && (resolveit.matches("[0-9]+")))  { resolv=Integer.parseInt(resolveit) } 
-		
-		
-		//Further override checks set modalBox config up
-		modalBoxConfig(attrs)
-		
-		//Further override checks set modalBox IFRAME config up
-		modalIframeConfig(attrs)
-		
-		// Render modalbox for this link
-		// -- TODO need to maybe revert back to original method and think of a better way of using the samebox but showing buttons titles etc
-		out << g.render(contextPath: pluginContextPath,template: 'loadmodalbox', model: [attrs:attrs])
-		
+
 		// Now process the link as per user action 
 		def result = extLinkChoiceService.returnLink(attrs.link.toString(),attrs.description.toString(),resolv,attrs.modalLabel.toString(),attrs.choice.toString(),attrs.id.toString(),attrs.title.toString())
 		
@@ -419,6 +443,17 @@ class ExtLinkChoiceTagLib {
 		 */
 		if (!attrs.right) {
 			attrs.right='auto'
+		}
+		
+		/*
+		 * Attribute close
+		 *
+		 *  Defines actual modal-body Close button label
+		 *  default = X
+		 *
+		 */
+		if (!attrs.close) {
+			attrs.close='X'
 		}
 	}
 	

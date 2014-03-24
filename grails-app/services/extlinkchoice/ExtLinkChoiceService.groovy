@@ -33,7 +33,7 @@ class ExtLinkChoiceService {
 			output="<div class=linkchoicebutton><a href='"+newLink1+"'>"+description+"</a></div>"
 		} else if (csetting.equals("_modal")) {
 			output="<div class=linkchoicebutton>"
-			output+="<a data-toggle='modal' class='btn' href='"+newLink1+"' data-target='#${id}'  class='btn btn-mini ajax'  rel='tooltip' >"
+			output+="<a data-toggle='modal' class='btn' href='"+newLink1+"' data-target='#modalBox'  title='"+title+"' description='"+description+"'  class='btn btn-mini ajax'  rel='tooltip' >"
 			output+=description+"</a></div>"
 			
 		}else {
