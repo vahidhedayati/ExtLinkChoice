@@ -1,4 +1,4 @@
-ExtLinkChoice 0.11
+ExtLinkChoice 0.12
 =============
 
 Grails plugin which lets you provide a link choice to users, so a user gets a pop up choice when hovering links. It is designed to support a full url 
@@ -9,7 +9,7 @@ so you may wish to g.createLink (...,absolute:true) if you wish to use it intern
 ## Installation:
 Add plugin Dependency :
 
-	compile ":extlinkchoice:0.11" 
+	compile ":extlinkchoice:0.12" 
 
 Or via grails command line:
 
@@ -23,6 +23,7 @@ Please refer to [example site](https://github.com/vahidhedayati/ExtLinkChoiceExa
 
 # Version info
 ```
+	0.12 Fugly DnsService - fixed still ugly a little better 
 	0.11 moved multi modalbox calls back into one call - modified to include all the goodies from previous version, Controller+Action calls added.
 	0.10 fix bug from 0.9 working plugin and added extra comments to taglib
 	0.9 0.8 not resolving hostnames - changed resolv call back to original has a bug 
