@@ -1,4 +1,7 @@
 package extlinkchoice
+
+import org.grails.plugins.web.taglib.ApplicationTagLib
+
 /*
  * This taglib contains the service call and a method to return user choice as a dynamic list viewable in any gsp so long
  *as end divId of linkPanel and linkChooser are defined and set up properly as per example
@@ -88,7 +91,7 @@ class ExtLinkChoiceTagLib {
 		}
 		
 		if (extlink==false){
-			def g = new org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib() 
+            ApplicationTagLib g = new ApplicationTagLib()
 			attrs.link= g.createLink(controller: attrs.controller, action: attrs.action, params:attrs,  absolute: 'true' )
 			if (!attrs.link) { 
 				throwTagError("Tag [returnLink] could not generate [link] from controller/action")

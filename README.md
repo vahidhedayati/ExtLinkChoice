@@ -7,14 +7,11 @@ so you may wish to g.createLink (...,absolute:true) if you wish to use it intern
 
 
 ## Installation:
-Add plugin Dependency :
+Add plugin Dependency (Grails 2.X):
 
 	compile ":extlinkchoice:0.12" 
 
-Or via grails command line:
-
-	grails install-plugin extlinkchoice
-
+Grails 3: https://bintray.com/artifact/download/vahid/maven/ExtLinkChoice-0.13.jar
 
 
 
